@@ -1,14 +1,14 @@
 ---
-- name: Install nginx on linux 설치
+- name: nginx 서버 환경 구축 for 센트OS
   hosts: nginx
   gather_facts: no
 
   tasks:
-    - name: install epel-release
+    - name: epel-release 패키지 설치 
       yum: name=epel-release state=latest
-    - name: install nginx web server
+    - name: nginx 웹 서버 설치 
       yum: name=nginx state=present
-    - name: upload default index.html for web server
+    - name: index.html 파일을 nginx 파일로 설정 
       get_url: url=https://www.nginx.com dest=/usr/share/nginx/html/ mode=0644
-    - name: start nginx web server
+    - name: nginx 웹 서버 시작
       service: name=nginx state=started
