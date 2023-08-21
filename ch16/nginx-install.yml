@@ -1,5 +1,5 @@
 ---
-- name: nginx 인스톨 스크립트
+- name: Install nginx on linux
   host: nginx
   gather_facts: no
 
