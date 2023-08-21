@@ -1,6 +1,6 @@
 ---
-- name: Install nginx on linux
-  host: nginx
+- name: Install nginx on linux 설치
+  hosts: nginx
   gather_facts: no
 
   tasks:
