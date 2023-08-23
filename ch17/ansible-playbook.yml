@@ -1,0 +1,12 @@
+---
+- name: Deploy demo
+  hosts: all
+  gather_facts: no
+  environment:
+    JAVA_HOME: /opt/java/openjdk
+
+  tasks:
+    - name:  war file install on tomcat
+      copy: src=/root/hello-world.war dest=/usr/local/tomcat/webapps mode=0644
+    - name:  Tomcat service started
+      command: /usr/bin/nohup /usr/local/tomcat/bin/startup.sh
