@@ -1,0 +1,24 @@
+---
+- name: Docker build demo
+  hosts: all
+  
+  tasks:
+  - name: stop current running docker container
+    command: docker stop demo-spring
+    ignore_errors: yes
+
+  - name: remove stopped docker container
+    command: docker rm demo-spring
+    ignore_errors: yes
+
+  - name: remove docker image 
+    command: docker rmi demo-spring-ansible
+    ignore_errors: yes
+
+  - name: build a docker image with deployed jar file
+    command: docker build -t demo-spring-ansible .
+    args:
+        chdir: /root
+
+  - name: create a container using demo-spring-ansible image
+    command: docker run -d --name demo-spring -p 9090:9090 demo-spring-ansible
