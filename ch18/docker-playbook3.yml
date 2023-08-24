@@ -1,0 +1,32 @@
+---
+- name: Docker build demo 3
+  hosts: 127.0.0.1
+  connection: local
+
+  tasks:
+  - name: stop current running docker container
+    command: docker stop demo-spring
+    ignore_errors: yes
+
+  - name: remove stopped docker container
+    command: docker rm demo-spring
+    ignore_errors: yes
+
+  - name: remove docker image 
+    command: docker rmi xxx.kr.ncr.ntruss.com/demo-spring-ansible
+    ignore_errors: yes
+
+  - name: build a docker image with deployed jar file
+    command: docker build -t xxx.kr.ncr.ntruss.com/demo-spring-ansible .
+    args:
+        chdir: /root
+
+  - name: upload image to NCP Container Registry 
+    command: docker login xxx.kr.ncr.ntruss.com -u xxx -p xxx
+    # Username --> Access Key Id , Password --> Secret Key
+    
+  - name: upload image to NCP Container Registry 
+    command: docker push xxx.kr.ncr.ntruss.com/demo-spring-ansible
+    
+  - name: create a container using demo-spring-ansible image
+    command: docker run -d --name demo-spring -p 9090:9090 xxx.kr.ncr.ntruss.com/demo-spring-ansible
