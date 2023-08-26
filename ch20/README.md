@@ -17,4 +17,5 @@ $ docker run --privileged -d -p 20022:22 \
     --net ansible-net                    \
     --name kube-node magiceco/kube-node
                            
-
+* 도커 이미지 빌드
+docker build -t magiceco/kube-node .
