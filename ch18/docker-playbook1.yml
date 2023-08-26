@@ -8,5 +8,6 @@
     command: docker build -t demo-spring-ansible .
     args:
         chdir: /root
+        
   - name: create a container using demo-spring-ansible image
     command: docker run -d --name demo-spring -p 9090:9090 demo-spring-ansible
