@@ -13,8 +13,8 @@ $ docker run -d -p 10022:22 --name ansible-server \
    magiceco/ssh-server:ubuntu       
 
 * 쿠버네티스 서버(kube-node) 실행
-$ docker run --privileged -d -p 20022:22 \
-    --net ansible-net                    \
+$ docker run --privileged -d -p 20022:22 -p 8001:8001 \
+    --net ansible-net                                 \
     --name kube-node magiceco/kube-node
                            
 * 도커 이미지 빌드
