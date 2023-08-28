@@ -12,10 +12,16 @@ $ docker run -d -p 10022:22 --name ansible-server \
    --net ansible-net                              \
    magiceco/ssh-server:ubuntu       
 
-* 쿠버네티스 서버(kube-node) 실행
+* Minikube 서버(kube-node) 실행
 $ docker run --privileged -d -p 20022:22 -p 8001:8001 \
     --net ansible-net                                 \
     --name kube-node magiceco/kube-node
                            
 * 도커 이미지 빌드
 docker build -t magiceco/kube-node .
+
+* Minikube 프록시 설정
+minikube kubectl -- proxy --address='0.0.0.0' --disable-filter=true
+
+* Minikube 프록시 접근
+<IP>:8001/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/
