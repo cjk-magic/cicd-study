@@ -1,0 +1,22 @@
+---
+- name: kube-node demo
+  hosts: kubernetes
+
+  tasks:
+  - name: copy file from ansible-server to kube-node
+    copy: src=/root/demo-spring-* dest=/root
+
+  - name: create a pod using demo-spring-pod.yml
+    command: minikube kubectl -- apply -f demo-spring-pod.yml
+    args:
+        chdir: /root
+
+  - name: create a service using demo-spring-svc.yml
+    command: minikube kubectl -- apply -f demo-spring-svc.yml
+    args:
+        chdir: /root
+
+  - name: start proxy server on minikube
+    command: minikube kubectl -- proxy --address='0.0.0.0' --disable-filter=true
+    ignore_errors: yes
+
