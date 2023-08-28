@@ -1,7 +1,8 @@
 ---
 - name: kube-node demo
   hosts: all
-
+  gather_facts: no
+  
   tasks:
   - name: copy file from ansible-server to kube-node
     copy: src=/root/demo-spring-pod.yml dest=/root
