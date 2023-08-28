@@ -1,0 +1,17 @@
+---
+- name: Docker build demo 1
+  hosts: 127.0.0.1
+  connection: local
+  
+  tasks:
+  - name: build a docker image with deployed jar file
+    command: docker build -t demo-spring-ansible .
+    args:
+        chdir: /root
+
+  - name: Login to NCP Container Registry 
+    command: docker login xxx.kr.ncr.ntruss.com -u xxx -p xxx
+    # Username --> Access Key Id , Password --> Secret Key
+    
+  - name: upload image to NCP Container Registry 
+    command: docker push xxx.kr.ncr.ntruss.com/demo-spring-ansible
