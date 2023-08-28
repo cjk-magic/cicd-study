@@ -1,6 +1,6 @@
 ---
 - name: kube-node demo
-  hosts: kubernetes
+  hosts: all
 
   tasks:
   - name: copy file from ansible-server to kube-node
