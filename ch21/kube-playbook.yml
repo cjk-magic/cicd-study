@@ -8,14 +8,10 @@
     copy: src=/root/demo-spring-svc.yml dest=/root
 
   - name: create a pod using demo-spring-pod.yml
-    command: minikube kubectl -- apply -f demo-spring-pod.yml
-    args:
-        chdir: /root
+    command: minikube kubectl -- apply -f /root/demo-spring-pod.yml
 
   - name: create a service using demo-spring-svc.yml
-    command: minikube kubectl -- apply -f demo-spring-svc.yml
-    args:
-        chdir: /root
+    command: minikube kubectl -- apply -f /root/demo-spring-svc.yml
 
   - name: start proxy server on minikube
     command: minikube kubectl -- proxy --address='0.0.0.0' --disable-filter=true
