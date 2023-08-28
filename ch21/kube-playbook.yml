@@ -4,7 +4,8 @@
 
   tasks:
   - name: copy file from ansible-server to kube-node
-    copy: src=/root/demo-spring-* dest=/root
+    copy: src=/root/demo-spring-pod.yml dest=/root
+    copy: src=/root/demo-spring-svc.yml dest=/root
 
   - name: create a pod using demo-spring-pod.yml
     command: minikube kubectl -- apply -f demo-spring-pod.yml
