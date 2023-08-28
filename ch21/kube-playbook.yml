@@ -17,6 +17,6 @@
     command: minikube kubectl -- apply -f /root/demo-spring-svc.yml
 
   - name: start proxy server on minikube
-    command: minikube kubectl -- proxy --address='0.0.0.0' --disable-filter=true
+    command: minikube kubectl -- proxy --address='0.0.0.0' --disable-filter=true &
     ignore_errors: yes
 
