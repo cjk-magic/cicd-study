@@ -5,7 +5,7 @@
   
   tasks:
   - name: build a docker image with deployed jar file
-    command: docker build -t demo-spring-ansible .
+    command: docker build -t xxx/demo-spring-ansible .
     args:
         chdir: /root
     ignore_errors: yes
