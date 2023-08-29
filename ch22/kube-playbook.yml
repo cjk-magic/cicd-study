@@ -7,14 +7,20 @@
   - name: copy demo-spring-pod.yml file from ansible-server to kube-node
     copy: src=/root/demo-spring-pod.yml dest=/root
 
-  - name: copy demo-spring-svc.yml file from ansible-server to kube-node    
+  - name: copy demo-spring-svc.yml file from ansible-server to kube-node
     copy: src=/root/demo-spring-svc.yml dest=/root
 
   - name: create a pod using demo-spring-pod.yml
+    command: minikube kubectl -- delete -f /root/demo-spring-pod.yml
+    ignore_errors: yes
+
+  - name: create a pod using demo-spring-pod.yml
     command: minikube kubectl -- apply -f /root/demo-spring-pod.yml
+    ignore_errors: yes
 
   - name: create a service using demo-spring-svc.yml
     command: minikube kubectl -- apply -f /root/demo-spring-svc.yml
+    ignore_errors: yes
 
   - name: start proxy server on minikube
     command: minikube kubectl -- proxy --address='0.0.0.0' --disable-filter=true &
