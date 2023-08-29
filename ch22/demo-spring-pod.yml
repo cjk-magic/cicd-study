@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demo-spring-pod
+  labels:
+    app: demo-spring-app
+spec:
+  containers:
+  - name: demo-spring
+    image: magiceco/demo-spring-ansible
+    ports:
+    - containerPort: 9090
