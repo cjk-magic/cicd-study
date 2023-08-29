@@ -18,8 +18,8 @@
     command: minikube kubectl -- apply -f /root/demo-spring-pod.yml
     ignore_errors: yes
 
-  - name: delete a pod using demo-spring-pod.yml
-    command: minikube kubectl -- delete -f /root/demo-spring-pod.yml
+  - name: delete a pod using demo-spring-svc.yml
+    command: minikube kubectl -- delete -f /root/demo-spring-svc.yml
     ignore_errors: yes
 
   - name: create a service using demo-spring-svc.yml
