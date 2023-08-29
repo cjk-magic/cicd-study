@@ -8,10 +8,12 @@
     command: docker build -t demo-spring-ansible .
     args:
         chdir: /root
+    ignore_errors: yes
 
-  - name: Login to NCP Container Registry 
-    command: docker login xxx.kr.ncr.ntruss.com -u xxx -p xxx
-    # Username --> Access Key Id , Password --> Secret Key
+  - name: Login to Docker Hub Registry 
+    command: docker login -u xxx -p xxx
+    ignore_errors: yes
     
-  - name: upload image to NCP Container Registry 
-    command: docker push xxx.kr.ncr.ntruss.com/demo-spring-ansible
+  - name: upload image to Docker Hub Registry 
+    command: docker push xxx/demo-spring-ansible
+    ignore_errors: yes
