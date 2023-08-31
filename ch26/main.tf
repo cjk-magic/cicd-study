@@ -13,12 +13,12 @@ resource "ncloud_login_key" "key_ncp_login" {
 }
 
 resource "ncloud_vpc" "vpc_scn_01" {
-  name            = var.name_scn01
+  name            = var.name_ncp_login
   ipv4_cidr_block = "192.168.0.0/16"
 }
 
 resource "ncloud_subnet" "subnet_scn_01" {
-  name           = var.name_scn01
+  name           = var.name_ncp_login
   vpc_no         = ncloud_vpc.vpc_scn_01.id
   subnet         = cidrsubnet(ncloud_vpc.vpc_scn_01.ipv4_cidr_block, 8, 1)
   // 192.168.1.0/24
@@ -30,14 +30,14 @@ resource "ncloud_subnet" "subnet_scn_01" {
 
 resource "ncloud_server" "server_scn_01" {
   subnet_no                 = ncloud_subnet.subnet_scn_01.id
-  name                      = var.name_scn01
+  name                      = var.name_ncp_login
   server_image_product_code = "SW.VSVR.OS.LNX64.UBNTU.SVR2004.B050" //ubuntu 20.04
   login_key_name            = ncloud_login_key.key_scn_01.key_name
 }
 
 resource "ncloud_public_ip" "public_ip_scn_01" {
   server_instance_no = ncloud_server.server_scn_01.id
-  description        = "for ${var.name_scn01}"
+  description        = "for ${var.name_ncp_login}"
 }
 
 locals {
@@ -76,7 +76,7 @@ resource "ncloud_network_acl_rule" "network_acl_01_rule" {
       ip_block    = inbound.value[2]
       port_range  = inbound.value[3]
       rule_action = inbound.value[4]
-      description = "for ${var.name_scn01}"
+      description = "for ${var.name_ncp_login}"
     }
   }
 
@@ -88,7 +88,7 @@ resource "ncloud_network_acl_rule" "network_acl_01_rule" {
       ip_block    = outbound.value[2]
       port_range  = outbound.value[3]
       rule_action = outbound.value[4]
-      description = "for ${var.name_scn01}"
+      description = "for ${var.name_ncp_login}"
     }
   }
 }

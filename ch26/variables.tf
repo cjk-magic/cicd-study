@@ -1,5 +1,5 @@
 variable name_ncp_login {
-  default = "ncp-demo1"
+  default = "cicd"
 }
 
 variable client_ip {
