@@ -9,7 +9,7 @@ provider "ncloud" {
 }
 
 resource "ncloud_login_key" "key_ncp_login" {
-  key_name = var.name_ncp_login
+  key_name = var.server_token
 }
 
 resource "ncloud_vpc" "vpc_scn_01" {
@@ -32,7 +32,7 @@ resource "ncloud_server" "server_scn_01" {
   subnet_no                 = ncloud_subnet.subnet_scn_01.id
   name                      = var.name_ncp_login
   server_image_product_code = "SW.VSVR.OS.LNX64.UBNTU.SVR2004.B050" //ubuntu 20.04
-  login_key_name            = ncloud_login_key.key_scn_01.key_name
+  //login_key_name            = ncloud_login_key.key_ncp_login.key_name
 }
 
 resource "ncloud_public_ip" "public_ip_scn_01" {
