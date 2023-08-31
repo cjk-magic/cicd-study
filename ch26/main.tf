@@ -8,8 +8,8 @@ provider "ncloud" {
   secret_key  = var.secret_key
 }
 
-resource "ncloud_login_key" "key_scn_01" {
-  key_name = var.name_scn01
+resource "ncloud_login_key" "key_ncp_login" {
+  key_name = var.name_ncp_login
 }
 
 resource "ncloud_vpc" "vpc_scn_01" {
