@@ -1,23 +1,17 @@
 provider "ncloud" {
-  support_vpc = true
-  region      = "KR"
-  access_key  = var.access_key
-  secret_key  = var.secret_key
+  access_key = var.access_key
+  secret_key = var.secret_key
+  region     = var.region
+}
+
+data "ncloud_regions" "regions" {
+}
+
+data "ncloud_server_images" "server_images" {
 }
 
 resource "ncloud_server" "server" {
-    name = "tf-test-vm1"
-    server_image_product_code = "SPSW0LINUX000032"
-    server_product_code = "SPSVRSTAND000004"
-
-    tag_list {
-      tag_key = "samplekey1"
-      tag_value = "samplevalue1"
-    }
-
-    tag_list {
-      tag_key = "samplekey2"
-      tag_value = "samplevalue2"
-    }
+  name                      = var.server_name
+  server_image_product_code = var.server_image_product_code
+  server_product_code       = var.server_product_code
 }
-
