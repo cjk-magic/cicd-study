@@ -9,21 +9,34 @@ terraform {
 
 provider "docker" {}
 
-resource "docker_image" "nginx" {
-  name         = "nginx:latest"
+resource "docker_image" "ssh-server" {
+  name         = "magiceco/ssh-server:ubuntu"
   keep_locally = false
 }
 
-resource "docker_container" "nginx" {
-  image = docker_image.nginx.image_id
-  name  = "tutorial"
+resource "docker_container" "ssh-server" {
+  image = docker_image.ssh-server.image_id
+  name  = "ssh-demo"
   ports {
-    internal = 80
-    external = 8000
+    internal = 22
+    external = 22
   }
 
-  provisioner "local-exec" {
-    command = "echo $(uname) >> os-version.txt"
+  connection {
+    type      = "ssh"
+    user      = "root"
+    password  = "1234" 
+    host      = "127.0.0.1"   
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "apt-get update", 
+      "apt-get install -y git",
+      "cd /root",
+      "git clone https://github.com/cjk-magic/docker.git",
+      "/bin/sh /root/docker/docker-cli-setup.sh"
+    ]
   }
 }
 
