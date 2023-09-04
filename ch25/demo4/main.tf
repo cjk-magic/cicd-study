@@ -1,29 +1,12 @@
-terraform {
-  required_providers {
-    docker = {
-      source = "kreuzwerker/docker"
-      version = "~> 3.0.1"
-    }
+resource "terraform_data" "host_provisioner" {
+
+  provisioner "remote-exec" {
+      script = "./script/ansible.sh"
+      connection {
+        type = "ssh"
+        user = "root"
+        password = "U3DH@maDT%Ti"
+        host = "223.130.161.27"
+      }
   }
 }
-
-provider "docker" {}
-
-resource "docker_image" "nginx" {
-  name         = "nginx:latest"
-  keep_locally = false
-}
-
-resource "docker_container" "nginx" {
-  image = docker_image.nginx.image_id
-  name  = "tutorial"
-  ports {
-    internal = 80
-    external = 8000
-  }
-
-  provisioner "local-exec" {
-    command = "echo $(uname) >> os-version.txt"
-  }
-}
-
