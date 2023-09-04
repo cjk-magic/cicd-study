@@ -22,7 +22,7 @@ resource "ncloud_public_ip" "public_ip" {
 }
 
 resource "ncloud_login_key" "key" {
-  key_name = "ncp-token-key2"
+  key_name = "ncp-token-key"
 }
 
 resource "ncloud_server" "server" {
@@ -52,6 +52,8 @@ resource "null_resource" "host_provisioner" {
 
   provisioner "remote-exec" {
       inline = [
+        "hostname",
+        "lsb_release -a",
         "/bin/sh docker-setup.sh"
       ]
       connection {
@@ -63,24 +65,8 @@ resource "null_resource" "host_provisioner" {
   }
 }
 
-output "cn_host_pw" {
-  sensitive = true
-  value = "sshpass -p '${data.ncloud_root_password.pwd.root_password}' ssh root@${ncloud_public_ip.public_ip.public_ip} -oStrictHostKeyChecking=no"
-}
-
-
-
-#   provisioner "file" {
-#     source = "script/"
-#     destination = "/root/"
-#     connection {
-#       type = "ssh"
-#       user = "root"
-#       password = ncloud_root_password.
-#       host = self.public_ip
-#     }
-#   }
-
-
+# output "cn_host_pw" {
+#   sensitive = true
+#   value = "sshpass -p '${data.ncloud_root_password.pwd.root_password}' ssh root@${ncloud_public_ip.public_ip.public_ip} -oStrictHostKeyChecking=no"
 # }
 
