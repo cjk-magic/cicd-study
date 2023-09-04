@@ -5,8 +5,8 @@ resource "terraform_data" "host_provisioner" {
       connection {
         type = "ssh"
         user = "root"
-        password = "U3DH@maDT%Ti"
-        host = "223.130.161.27"
+        password = "xxx"
+        host = "xxx.XXX.XXX.XXX"
       }
   }
 }
