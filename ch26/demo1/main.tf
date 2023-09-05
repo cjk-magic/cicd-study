@@ -39,17 +39,6 @@ data "ncloud_root_password" "pwd" {
 
 resource "terraform_data" "host_provisioner" {
 
-  provisioner "file" {
-      source = "scripts/"
-      destination = "/root/"
-      connection {
-        type = "ssh"
-        user = "root"
-        password = data.ncloud_root_password.pwd.root_password
-        host = ncloud_public_ip.public_ip.public_ip
-      }
-  }
-
   provisioner "remote-exec" {
      scripts = [ "./scripts/docker-setup.sh", 
                  "./scripts/ansible.sh",
