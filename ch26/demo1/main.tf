@@ -51,11 +51,10 @@ resource "null_resource" "host_provisioner" {
   }
 
   provisioner "remote-exec" {
-      inline = [
-        "hostname",
-        "lsb_release -a",
-        "/bin/sh docker-setup.sh"
-      ]
+     scripts = [ "./scripts/docker-setup.sh", 
+                 "./scripts/ansible.sh",
+                 "./scripts/script.sh"] 
+
       connection {
          type = "ssh"
         user = "root"
@@ -64,9 +63,3 @@ resource "null_resource" "host_provisioner" {
       }
   }
 }
-
-# output "cn_host_pw" {
-#   sensitive = true
-#   value = "sshpass -p '${data.ncloud_root_password.pwd.root_password}' ssh root@${ncloud_public_ip.public_ip.public_ip} -oStrictHostKeyChecking=no"
-# }
-
