@@ -37,7 +37,7 @@ data "ncloud_root_password" "pwd" {
   private_key = ncloud_login_key.key.private_key
 }
 
-resource "null_resource" "host_provisioner" {
+resource "terraform_data" "host_provisioner" {
 
   provisioner "file" {
       source = "scripts/"
